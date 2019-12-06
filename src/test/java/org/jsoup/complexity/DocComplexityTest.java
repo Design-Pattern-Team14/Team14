@@ -1,4 +1,3 @@
-
 package org.jsoup.complexity;
 
 import org.jsoup.nodes.Node;
@@ -14,6 +13,7 @@ import org.junit.Before;
 import org.jsoup.select.NodeTraversor;
 
 public class DocComplexityTest {
+
     private Document document;
     private String id;
 
