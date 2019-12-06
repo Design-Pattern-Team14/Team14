@@ -53,6 +53,7 @@ public class ForCrawlerJsoupTest {
     public void testReSelectObject() {
         // reselect 함수 정상 작동하는지 검사
         // 변경되는 부분도 올바르게 가져오는지 검사위해 not null 인지만 봄
+        //////////////////////////////////////
         String resultReTitle;
         c.selectElement("div.home_news");
         resultReTitle = c.reSelectElement("h2").substring(0, 4);
