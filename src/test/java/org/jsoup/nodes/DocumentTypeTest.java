@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
 public class DocumentTypeTest {
     @Test
     public void constructorValidationOkWithBlankName() {
-        DocumentType fail = new DocumentType("","", "");
+        DocumentType fail = new DocumentType("", "", "");
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -24,24 +24,28 @@ public class DocumentTypeTest {
 
     @Test
     public void constructorValidationOkWithBlankPublicAndSystemIds() {
-        DocumentType fail = new DocumentType("html","", "");
+        DocumentType fail = new DocumentType("html", "", "");
     }
 
-    @Test public void outerHtmlGeneration() {
+    @Test
+    public void outerHtmlGeneration() {
         DocumentType html5 = new DocumentType("html", "", "");
         assertEquals("<!doctype html>", html5.outerHtml());
 
         DocumentType publicDocType = new DocumentType("html", "-//IETF//DTD HTML//", "");
         assertEquals("<!DOCTYPE html PUBLIC \"-//IETF//DTD HTML//\">", publicDocType.outerHtml());
 
-        DocumentType systemDocType = new DocumentType("html", "", "http://www.ibm.com/data/dtd/v11/ibmxhtml1-transitional.dtd");
-        assertEquals("<!DOCTYPE html \"http://www.ibm.com/data/dtd/v11/ibmxhtml1-transitional.dtd\">", systemDocType.outerHtml());
+        DocumentType systemDocType = new DocumentType("html", "",
+                "http://www.ibm.com/data/dtd/v11/ibmxhtml1-transitional.dtd");
+        assertEquals("<!DOCTYPE html \"http://www.ibm.com/data/dtd/v11/ibmxhtml1-transitional.dtd\">",
+                systemDocType.outerHtml());
 
         DocumentType combo = new DocumentType("notHtml", "--public", "--system");
         assertEquals("<!DOCTYPE notHtml PUBLIC \"--public\" \"--system\">", combo.outerHtml());
     }
 
-    @Test public void testRoundTrip() {
+    @Test
+    public void testRoundTrip() {
         String base = "<!DOCTYPE html>";
         assertEquals("<!doctype html>", htmlOutput(base));
         assertEquals(base, xmlOutput(base));

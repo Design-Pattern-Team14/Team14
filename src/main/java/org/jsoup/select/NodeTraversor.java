@@ -6,9 +6,11 @@ import org.jsoup.nodes.Node;
 import org.jsoup.select.NodeFilter.FilterResult;
 
 /**
- * Depth-first node traversor. Use to iterate through all nodes under and including the specified root node.
+ * Depth-first node traversor. Use to iterate through all nodes under and
+ * including the specified root node.
  * <p>
- * This implementation does not use recursion, so a deep DOM does not risk blowing the stack.
+ * This implementation does not use recursion, so a deep DOM does not risk
+ * blowing the stack.
  * </p>
  */
 public class NodeTraversor {
@@ -16,8 +18,11 @@ public class NodeTraversor {
 
     /**
      * Create a new traversor.
-     * @param visitor a class implementing the {@link NodeVisitor} interface, to be called when visiting each node.
-     * @deprecated Just use the static {@link NodeTraversor#filter(NodeFilter, Node)} method.
+     * 
+     * @param visitor a class implementing the {@link NodeVisitor} interface, to be
+     *                called when visiting each node.
+     * @deprecated Just use the static
+     *             {@link NodeTraversor#filter(NodeFilter, Node)} method.
      */
     public NodeTraversor(NodeVisitor visitor) {
         this.visitor = visitor;
@@ -25,8 +30,10 @@ public class NodeTraversor {
 
     /**
      * Start a depth-first traverse of the root and all of its descendants.
+     * 
      * @param root the root node point to traverse.
-     * @deprecated Just use the static {@link NodeTraversor#filter(NodeFilter, Node)} method.
+     * @deprecated Just use the static
+     *             {@link NodeTraversor#filter(NodeFilter, Node)} method.
      */
     public void traverse(Node root) {
         traverse(visitor, root);
@@ -34,13 +41,14 @@ public class NodeTraversor {
 
     /**
      * Start a depth-first traverse of the root and all of its descendants.
+     * 
      * @param visitor Node visitor.
-     * @param root the root node point to traverse.
+     * @param root    the root node point to traverse.
      */
     public static void traverse(NodeVisitor visitor, Node root) {
         Node node = root;
         int depth = 0;
-        
+
         while (node != null) {
             visitor.head(node, depth);
             if (node.childNodeSize() > 0) {
@@ -60,9 +68,46 @@ public class NodeTraversor {
         }
     }
 
+    public static void traverse_mo(NodeVisitor visitor, Node root) {
+        Node node = root;
+        int depth = 0;
+        int max_depth = 0;
+        int count = 0;
+        System.out.println("debug");
+
+        while (node != null) {
+            visitor.head(node, depth);
+            if (node.childNodeSize() > 0) {
+                node = node.childNode(0);
+                count++;
+                depth++;
+            } else {
+                while (node.nextSibling() == null && depth > 0) {
+                    visitor.tail(node, depth);
+                    node = node.parentNode();
+                    if (max_depth >= depth)
+                        max_depth = max_depth;
+                    else
+                        max_depth = depth;
+                    depth--;
+
+                }
+                visitor.tail(node, depth);
+                if (node == root) {
+                    System.out.println("Max Depth is " + max_depth);
+                    System.out.println("All count  is " + count);
+                    break;
+                }
+                node = node.nextSibling();
+                count++;
+            }
+        }
+    }
+
     /**
      * Start a depth-first traverse of all elements.
-     * @param visitor Node visitor.
+     * 
+     * @param visitor  Node visitor.
      * @param elements Elements to filter.
      */
     public static void traverse(NodeVisitor visitor, Elements elements) {
@@ -74,8 +119,9 @@ public class NodeTraversor {
 
     /**
      * Start a depth-first filtering of the root and all of its descendants.
+     * 
      * @param filter Node visitor.
-     * @param root the root node point to traverse.
+     * @param root   the root node point to traverse.
      * @return The filter result of the root node, or {@link FilterResult#STOP}.
      */
     public static FilterResult filter(NodeFilter filter, Node root) {
@@ -126,7 +172,8 @@ public class NodeTraversor {
 
     /**
      * Start a depth-first filtering of all elements.
-     * @param filter Node filter.
+     * 
+     * @param filter   Node filter.
      * @param elements Elements to filter.
      */
     public static void filter(NodeFilter filter, Elements elements) {
