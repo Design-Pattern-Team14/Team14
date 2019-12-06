@@ -34,6 +34,7 @@ public class ForCrawlerJsoupTest {
     public void testSelectsAndAbstractObject() {
         // 변경되는 부분도 올바르게 가져오는지 검사위해 not null 인지만 봄
         // selectElements도 올바르게 작동하는지 확인
+        //
         String resultArticle;
         resultArticle = c.selectElements("li");
         assertNotNull(resultArticle);
