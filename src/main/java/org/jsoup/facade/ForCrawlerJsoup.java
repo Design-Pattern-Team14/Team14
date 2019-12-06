@@ -40,7 +40,7 @@ public class ForCrawlerJsoup {
     // element 하나만
     public String selectElement(String tags) {
         tempElement = doc.select(tags);
-        String element = tempElement.toString();
+        String element = tempElement.text();
 
         return element;
     }
@@ -52,9 +52,9 @@ public class ForCrawlerJsoup {
 
         for (Element el : tempElement) {
             if (resultElements.isEmpty())
-                resultElements = el.toString();
+                resultElements = el.text();
 
-            resultElements = resultElements.concat("," + el.toString());
+            resultElements = resultElements.concat("," + el.text());
         }
         return resultElements;
     }
@@ -65,7 +65,7 @@ public class ForCrawlerJsoup {
         ArrayList<String> resultElements = new ArrayList<String>();
 
         for (Element el : tempElement) {
-            resultElements.add(el.toString());
+            resultElements.add(el.text());
         }
         return resultElements;
     }
@@ -76,7 +76,7 @@ public class ForCrawlerJsoup {
         String resultElement = new String();
         tempElement = tempElement.select(tags);
 
-        resultElement = tempElement.toString();
+        resultElement = tempElement.text();
 
         return resultElement;
     }
@@ -88,9 +88,9 @@ public class ForCrawlerJsoup {
 
         for (Element el : tempElement) {
             if (resultElements.isEmpty())
-                resultElements = el.toString();
+                resultElements = el.text();
 
-            resultElements = resultElements.concat("," + el.toString());
+            resultElements = resultElements.concat("," + el.text());
         }
         return resultElements;
     }
@@ -101,14 +101,14 @@ public class ForCrawlerJsoup {
         ArrayList<String> resultElements = new ArrayList<String>();
 
         for (Element el : tempElement) {
-            resultElements.add(el.toString());
+            resultElements.add(el.text());
         }
         return resultElements;
     }
 
     // 현재의 tempElement check (For reselect)
     public String checkTempElement() {
-        return tempElement.toString();
+        return tempElement.text();
     }
 
     // tmepElement를 직접 setting
