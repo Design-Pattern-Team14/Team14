@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # jsoup: Java HTML Parser
 
 **jsoup** is a Java library for working with real-world HTML. It provides a very convenient API for extracting and manipulating data, using the best of DOM, CSS, and jquery-like methods.
@@ -48,3 +49,6 @@ The [colophon](https://jsoup.org/colophon) talks about the history of and tools 
 
 ## Status
 jsoup is in general, stable release.
+=======
+Team 14
+>>>>>>> 18498cb1d8da32a087f86b0bbd2dc9e6c676b970
